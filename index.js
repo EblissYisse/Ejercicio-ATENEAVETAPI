@@ -15,6 +15,11 @@ class AteneaVetAPI{
 
         //obtener informacion desde api se utliza metodo get
         //enviar datos al servidor para que los guarde y haga algo con ellos se utliza metodo post
+        
+        this.app.use(this.configurarCORS);
+        this.app.use(express.json());
+
+        //TO DO: Error!!! estoy confiando en los datos del frontEnd, debemos validar los datos
 
         //crear rutas para los diferentes metodos
         this.app.post("/crear_especie", (req, res)=>{
@@ -24,13 +29,11 @@ class AteneaVetAPI{
         });
         this.app.get("/Listar_especies", (req, res)=>{
 
-            this.adminEspecie.listarEspecie(req, res);
+            this.adminEspecie.listarEspecies(req, res);
 
         });
 
-        this.app.use(this.configurarCORS);
-        this.app.use(express.json());
-
+      
     }
 
     //configurar los encabezados para CORS
@@ -43,6 +46,7 @@ class AteneaVetAPI{
 
 
     }
+    //TO DO: Error!!! no estoy gestionando excepciones
     iniciarServidor(){
 
         this.app.listen(this.puerto, ()=>{
